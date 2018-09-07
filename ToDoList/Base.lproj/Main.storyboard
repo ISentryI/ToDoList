@@ -26,6 +26,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="n1Q-fi-SMD" kind="show" identifier="showDetails" id="xwQ-Tl-z0L"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -36,7 +39,7 @@
                     <navigationItem key="navigationItem" title="My To Do's" id="PQ5-ZW-XhP">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="3oS-sQ-grk">
                             <connections>
-                                <segue destination="zry-43-Ias" kind="presentation" id="jh0-zo-hLc"/>
+                                <segue destination="zry-43-Ias" kind="presentation" id="0X3-gm-usU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -68,6 +71,10 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="returnPressed:" destination="n1Q-fi-SMD" eventType="primaryActionTriggered" id="KMk-tH-9Y3"/>
+                                                        <action selector="textEditingChanged:" destination="n1Q-fi-SMD" eventType="editingDidEnd" id="awq-lW-2QG"/>
+                                                    </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pam-UX-8Qe">
                                                     <rect key="frame" x="16" y="4" width="36" height="36"/>
@@ -77,6 +84,9 @@
                                                     </constraints>
                                                     <state key="normal" image="Unchecked"/>
                                                     <state key="selected" image="Checked"/>
+                                                    <connections>
+                                                        <action selector="isCompleteButtonTapped:" destination="n1Q-fi-SMD" eventType="touchUpInside" id="nSI-h1-LHZ"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -113,6 +123,9 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="557997844.91166699">
                                                         <!--2018-09-07 07:24:04 +0000-->
                                                     </date>
+                                                    <connections>
+                                                        <action selector="datePickerChanged:" destination="n1Q-fi-SMD" eventType="primaryActionTriggered" id="Gng-WZ-fpZ"/>
+                                                    </connections>
                                                 </datePicker>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Due Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bec-cl-mbX">
                                                     <rect key="frame" x="16" y="11" width="72" height="21"/>
@@ -179,11 +192,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="dueDataPicker" destination="Oxx-6Y-y6D" id="An1-eW-w08"/>
-                        <outlet property="dueDateLabel" destination="fzv-kG-HV6" id="ucs-7D-8Tf"/>
+                        <outlet property="dueDateLabel" destination="fzv-kG-HV6" id="Gnc-hf-chO"/>
+                        <outlet property="dueDatePicker" destination="Oxx-6Y-y6D" id="OhR-EQ-Mxz"/>
                         <outlet property="isCompleteButton" destination="pam-UX-8Qe" id="ses-7o-N5q"/>
                         <outlet property="notesTextView" destination="Ne8-5d-eua" id="ppl-D3-djp"/>
-                        <outlet property="saveButton" destination="nB5-oT-dgS" id="c72-29-KtM"/>
+                        <outlet property="saveButton" destination="nB5-oT-dgS" id="PRv-hM-hyJ"/>
                         <outlet property="titleTextField" destination="RC0-j8-WV3" id="ypC-fz-SG1"/>
                     </connections>
                 </tableViewController>
@@ -206,7 +219,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UhS-7R-eAw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1569" y="15"/>
+            <point key="canvasLocation" x="1665" y="443"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lci-e8-3HY">
@@ -229,4 +242,7 @@
         <image name="Checked" width="44" height="44"/>
         <image name="Unchecked" width="44" height="44"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Udc-rX-tJJ"/>
+    </inferredMetricsTieBreakers>
 </document>

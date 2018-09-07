@@ -11,13 +11,22 @@ import UIKit
 class ToDoTableViewController : UITableViewController {
     
     @IBAction func unwindToDoList(segue: UIStoryboardSegue) {
+        guard segue.identifier == "saveUnwind" else { return }
+        let sourceViewController = segue.source as! ToDoViewController
         
+        if let todo = sourceViewController.todo{
+            let newIndexPath = IndexPath(row: todos.count, section: 0)
+            
+            todos.append(todo)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        }
     }
     
     var todos = [ToDo]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         navigationItem.leftBarButtonItem = editButtonItem
         if let savedToDos = ToDo.loadToDos() {
@@ -52,6 +61,14 @@ class ToDoTableViewController : UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetails" {
+            let todoViewController = segue.destination as! ToDoViewController
+            let indexPath = tableView.indexPathForSelectedRow!
+            let selectedTodo = todos[indexPath.row]
+            todoViewController.todo = selectedTodo
+        }
+    }
     
 }
