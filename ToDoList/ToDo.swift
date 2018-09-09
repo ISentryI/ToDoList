@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ToDo {
+struct ToDo: Codable {
     var dueDate : Date
     var title : String
     var isComplete : Bool
@@ -21,8 +21,22 @@ struct ToDo {
         return formatter
     }()
     
+    static let DocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    
+    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("todos").appendingPathExtension("plist")
+    
+    
     static func loadToDos() -> [ToDo]? {
-        return nil
+        guard let codeToDos = try? Data(contentsOf: ArchiveURL)
+            else {return nil}
+        let propertyListDecoder = PropertyListDecoder()
+        return try? propertyListDecoder.decode(Array<ToDo>.self, from: codeToDos)
+    }
+    
+    static func saveToDos(_ todos: [ToDo]){
+        let propertyListEncoder = PropertyListEncoder()
+        let codedToDos = try? propertyListEncoder.encode(todos)
+        try? codedToDos?.write(to: ArchiveURL, options: .noFileProtection)
     }
     
     static func loadSampleToDos() -> [ToDo] {
@@ -32,6 +46,5 @@ struct ToDo {
         
         return [todo1, todo2, todo3]
     }
-    
     
 }
